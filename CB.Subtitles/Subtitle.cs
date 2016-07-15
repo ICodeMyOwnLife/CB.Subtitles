@@ -346,7 +346,7 @@ namespace CB.Subtitles
             }
         }
 
-        private void FillSrtLines(string text, SubtitleItem si) // font color, font size
+        private static void FillSrtLines(string text, SubtitleItem si) // font color, font size
         {
             var tokens = text.Split('<', '>');
             var format = TextFormat.None;
@@ -388,7 +388,7 @@ namespace CB.Subtitles
                             if (format.HasFlag(TextFormat.Strikethrough)) format &= ~TextFormat.Strikethrough;
                             break;
                         case "/font":
-                            colors.Pop();
+                            if(colors.Any()) colors.Pop();
                             break;
                         default:
                             if (s.StartsWith("font color=\""))
